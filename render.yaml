@@ -1,0 +1,20 @@
+services:
+  - type: worker
+    name: kiara-autoshopi
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: DB_PATH
+        value: /data/bot.db
+      - key: API_STATE_PATH
+        value: /data/api_endpoints.json
+      - key: SITES_PATH
+        value: /data/sites.txt
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
